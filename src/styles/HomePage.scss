@@ -1,3 +1,5 @@
+@import url(global.scss);
+
 .homepage {
   display: flex;
   flex-direction: column;
@@ -16,5 +18,12 @@
   p {
     font-size: 1.2rem;
     opacity: 0.8;
+  }
+}
+
+.dark-mode {
+  .homepage {
+    background: #f5f5f5;
+    color: #121212;
   }
 }

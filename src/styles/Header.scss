@@ -1,11 +1,18 @@
+@import url(global.scss);
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: #1e1e1e;
+  background: var(--primary-bg);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 60px;
 
   h1 {
     font-size: 1.8rem;
@@ -25,13 +32,17 @@
       &:hover {
         color: #00ff99;
       }
+      &.active {
+        color: #00ff99;
+        font-weight: bold;
+      }
     }
   }
 }
 
 .dark-mode {
   .header {
-    background: #f5f5f5;
+    background: #bbbaba79;
     color: #121212;
 
     nav a {
@@ -39,6 +50,11 @@
 
       &:hover {
         color: #0099ff;
+      }
+
+      &.active {
+        color: #0099ff;
+        font-weight: bold;
       }
     }
   }
