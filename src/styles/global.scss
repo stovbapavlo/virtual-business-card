@@ -1,9 +1,26 @@
+:root {
+  --primary-bg: #1e1e1e;
+  --primary-text: #ffffff;
+  --secondary-bg: #f5f5f5;
+  --secondary-text: #121212;
+  --accent-color: #00ff99;
+}
+
+.dark-mode {
+  --primary-bg: #f5f5f5;
+  --primary-text: #121212;
+  --secondary-bg: #1e1e1e;
+  --secondary-text: #ffffff;
+  --accent-color: #0099ff;
+}
+
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #121212;
+  background-color: var(--primary-bg);
   color: #fff;
+  overflow-x: hidden;
 }
 
 .dark-mode {

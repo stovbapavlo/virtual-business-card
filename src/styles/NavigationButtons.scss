@@ -1,0 +1,49 @@
+@import url(global.scss);
+.navigation-buttons {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+
+  .nav-button {
+    background-color: white;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    &:hover {
+      background-color: #a7a7a7;
+      transform: scale(1.1);
+    }
+
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+
+      &:hover {
+        background-color: #cccccc;
+      }
+    }
+  }
+}
