@@ -1,6 +1,4 @@
-@import url(global.scss);
-
-.homepage {
+.skills {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,21 +7,13 @@
   text-align: center;
   background: linear-gradient(135deg, #1e1e1e, #333);
   color: white;
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-
-  p {
-    font-size: 1.2rem;
-    opacity: 0.8;
-  }
+  position: relative;
+  z-index: 1;
 }
 
 .dark-mode {
-  .homepage {
-    background: #f5f5f5;
+  .skills {
+    background: linear-gradient(135deg, #f5f5f5, #f2ecec);
     color: #121212;
   }
 }
