@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, animate } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import PageWrapper from '../layout/PageWrapper';
 import '../../styles/pages/Skills.scss';
+import SkillInfo from '../SkillInfo';
 
 import reactLogo from '../../assets/img/logos/react.png';
 import tsLogo from '../../assets/img/logos/typescript.png';
@@ -10,20 +11,49 @@ import scssLogo from '../../assets/img/logos/sass.png';
 import reduxLogo from '../../assets/img/logos/redux.png';
 
 const skills = [
-  { name: 'React', level: 90, logo: reactLogo },
-  { name: 'TypeScript', level: 85, logo: tsLogo },
-  { name: 'JavaScript', level: 80, logo: jsLogo },
-  { name: 'SCSS', level: 75, logo: scssLogo },
-  { name: 'Redux Toolkit', level: 80, logo: reduxLogo },
+  {
+    name: 'React',
+    level: 70,
+    logo: reactLogo,
+    description:
+      'I have experience developing web applications using React, including functional components, hooks, context, state management, and routing.',
+  },
+  {
+    name: 'JavaScript',
+    level: 80,
+    logo: jsLogo,
+    description:
+      'I have experience with JavaScript, including ES6+ syntax, asynchronous programming, DOM manipulation, and event handling.',
+  },
+  {
+    name: 'SCSS',
+    level: 40,
+    logo: scssLogo,
+    description:
+      'I have experience with SCSS for writing modular, maintainable, and scalable styles.',
+  },
+  {
+    name: 'TypeScript',
+    level: 45,
+    logo: tsLogo,
+    description:
+      'I have experience with TypeScript in React, improving code quality, enforcing type safety, and reducing runtime errors.',
+  },
+  {
+    name: 'Redux Toolkit',
+    level: 25,
+    logo: reduxLogo,
+    description:
+      'Basic experience with Redux Toolkit: state management, slices, createAsyncThunk, useSelector, useDispatch',
+  },
 ];
 
 const Skills: React.FC = () => {
   const [activeSkill, setActiveSkill] = useState<null | (typeof skills)[0]>(null);
   const [isPaused, setIsPaused] = useState(false);
   const rotationRef = useRef(0);
-  const progressRef = useRef(314);
   const [rotation, setRotation] = useState(0);
-  const [, forceUpdate] = useState(0);
+  const [strokeOffset, setStrokeOffset] = useState(352);
 
   useEffect(() => {
     let animationFrame: number;
@@ -40,31 +70,24 @@ const Skills: React.FC = () => {
 
   useEffect(() => {
     if (activeSkill) {
-      const newOffset = 352 - (352 * activeSkill.level) / 100;
-      console.log(`Setting progress bar offset: ${newOffset}`);
-      animate(progressRef.current, newOffset, {
-        duration: 1.2,
-        ease: 'easeInOut',
-        onUpdate: (latest) => {
-          progressRef.current = latest;
-          forceUpdate((prev) => prev + 1);
-        },
-      });
+      const maxOffset = 293;
+      const progress = (maxOffset * activeSkill.level) / 100;
+      const newOffset = maxOffset - progress;
+      setStrokeOffset(newOffset);
     } else {
-      progressRef.current = 352;
-      forceUpdate((prev) => prev + 1);
+      setStrokeOffset(293);
     }
   }, [activeSkill]);
 
-  const handleSkillHover = (skill: (typeof skills)[0]) => {
+  const handleSkillHover = useCallback((skill: (typeof skills)[0]) => {
     setActiveSkill(skill);
     setIsPaused(true);
-  };
+  }, []);
 
-  const handleSkillLeave = () => {
+  const handleSkillLeave = useCallback(() => {
     setActiveSkill(null);
     setIsPaused(false);
-  };
+  }, []);
 
   return (
     <PageWrapper className="skills">
@@ -77,8 +100,11 @@ const Skills: React.FC = () => {
               cx="60"
               cy="60"
               r="56"
-              strokeDasharray="352"
-              strokeDashoffset={progressRef.current}
+              strokeDasharray="293"
+              strokeDashoffset={strokeOffset}
+              style={{
+                opacity: activeSkill ? 1 : 0,
+              }}
             />
           </svg>
 
@@ -126,6 +152,8 @@ const Skills: React.FC = () => {
           );
         })}
       </div>
+
+      <SkillInfo skill={activeSkill} />
     </PageWrapper>
   );
 };
