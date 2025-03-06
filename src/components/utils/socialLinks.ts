@@ -1,6 +1,6 @@
-import githubLogo from '../../assets/img/logos/github.png';
-import linkedinLogo from '../../assets/img/logos/linkedin.png';
-import telegramLogo from '../../assets/img/logos/telegram.png';
+import githubLogo from '../../assets/img/logos/GitHub.png';
+import linkedinLogo from '../../assets/img/logos/LinkedIn.png';
+import telegramLogo from '../../assets/img/logos/Telegram.png';
 
 export const socialLinks = [
   {
