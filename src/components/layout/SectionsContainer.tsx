@@ -34,7 +34,12 @@ const SectionsContainer: React.FC<Props> = ({ sectionRefs }) => {
   return (
     <div className="content">
       {sections.map((Component, index) => (
-        <div key={index} ref={(el) => (sectionRefs.current[index] = el)} className="section">
+        <div
+          key={index}
+          ref={(el) => {
+            sectionRefs.current[index] = el;
+          }}
+          className="section">
           <Component />
         </div>
       ))}
