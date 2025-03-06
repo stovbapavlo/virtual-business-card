@@ -1,0 +1,28 @@
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 0.9rem;
+  position: relative;
+  bottom: 0;
+  margin-top: auto;
+
+  p {
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  &:hover p {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.dark-mode {
+  footer {
+    background: #bbbaba79;
+    color: #121212;
+  }
+}

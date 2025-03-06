@@ -1,50 +1,32 @@
-// store/slices/navigationSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { routes } from '../../routesConfig';
 
 interface NavigationState {
   direction: number;
   prevRoute: string;
-  currentIndex: number;
+  currentSection: number;
 }
 
 const initialState: NavigationState = {
   direction: 1,
   prevRoute: window.location.pathname,
-  currentIndex: routes.indexOf(window.location.pathname),
+  currentSection: 0,
 };
 
 const navigationSlice = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
-    updateDirection: (state, action: PayloadAction<string>) => {
-      const currentIndex = routes.indexOf(action.payload);
-      const prevIndex = routes.indexOf(state.prevRoute);
-
-      if (currentIndex > prevIndex) {
-        state.direction = 1;
-      } else if (currentIndex < prevIndex) {
-        state.direction = -1;
-      }
-
-      state.prevRoute = action.payload;
-      state.currentIndex = currentIndex;
+    setCurrentSection: (state, action: PayloadAction<number>) => {
+      state.currentSection = action.payload;
     },
     navigateUp: (state) => {
-      if (state.currentIndex > 0) {
-        state.currentIndex -= 1;
-        state.direction = -1;
-      }
+      if (state.currentSection > 0) state.currentSection -= 1;
     },
     navigateDown: (state) => {
-      if (state.currentIndex < routes.length - 1) {
-        state.currentIndex += 1;
-        state.direction = 1;
-      }
+      if (state.currentSection < 4) state.currentSection += 1;
     },
   },
 });
 
-export const { updateDirection, navigateUp, navigateDown } = navigationSlice.actions;
+export const { setCurrentSection, navigateUp, navigateDown } = navigationSlice.actions;
 export default navigationSlice.reducer;
