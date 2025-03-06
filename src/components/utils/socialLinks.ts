@@ -1,4 +1,3 @@
-// utils/socialLinks.ts
 import githubLogo from '../../assets/img/logos/github.png';
 import linkedinLogo from '../../assets/img/logos/linkedin.png';
 import telegramLogo from '../../assets/img/logos/telegram.png';
