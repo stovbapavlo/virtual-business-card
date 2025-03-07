@@ -5,32 +5,13 @@
   justify-content: center;
   height: 100vh;
   text-align: center;
-  background: linear-gradient(135deg, #1e1e1e, #333);
+  background: linear-gradient(135deg, var(--secondary-bg), #333);
   color: white;
   position: relative;
   padding: 20px;
 
   .contact-card:last-child {
     margin-bottom: 2rem;
-  }
-
-  .copied-notification {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    opacity: 0;
-    transform: translate(-50%, 10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    margin-top: -25px;
-    left: 50%;
-
-    &.visible {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
   }
 
   .contact-info {
@@ -62,6 +43,7 @@
         padding: 8px;
         border-radius: 8px;
         transition: background 0.3s ease-in-out;
+        position: relative;
 
         &:hover {
           background: rgba(255, 255, 255, 0.2);
@@ -77,6 +59,26 @@
           font-size: 1rem;
           margin: 0;
           text-decoration: none;
+        }
+        .copied-notification {
+          position: absolute;
+          background: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 0.9rem;
+          opacity: 0;
+          white-space: nowrap;
+          pointer-events: none;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%) translateY(-10px);
+          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+          &.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-15px);
+          }
         }
       }
     }

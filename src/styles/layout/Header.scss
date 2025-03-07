@@ -4,8 +4,7 @@
   align-items: center;
   padding: 15px 30px;
   background: var(--primary-bg);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: var(--primary-text);
   position: fixed;
   top: 0;
   left: 0;
@@ -28,18 +27,17 @@
       padding: 0;
       margin: 0 10px;
       font-size: 16px;
-      color: white;
+      color: var(--primary-text);
       text-decoration: none;
       cursor: pointer;
+      transition: color 0.3s ease-in-out;
 
       &:hover {
-        color: #fff;
-        font-size: 1rem;
-        transition: color 0.3s ease-in-out;
+        color: var(--accent-color);
       }
 
       &.active {
-        color: #00ff99;
+        color: var(--accent-color);
         font-weight: bold;
       }
     }
@@ -48,16 +46,6 @@
 
 .dark-mode {
   .header {
-    background: #e3e2e279;
-    color: #121212;
-
-    nav button {
-      color: #121212;
-
-      &.active {
-        color: #0099ff;
-        font-weight: bold;
-      }
-    }
+    box-shadow: 0 4px 10px var(--border-color);
   }
 }

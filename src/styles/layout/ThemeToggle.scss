@@ -1,13 +1,12 @@
-@import url(../global.scss);
 .theme-toggle {
   background: none;
-  border: 2px solid #fff;
+  border: 2px solid var(--primary-text);
   border-radius: 50%;
   width: 40px;
   height: 40px;
   font-size: 1.4rem;
   padding: 0;
-  color: #fff;
+  color: var(--primary-text);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
@@ -22,8 +21,8 @@
 
 .dark-mode {
   .theme-toggle {
-    border-color: #121212;
-    color: #121212;
+    border-color: var(--secondary-text);
+    color: var(--secondary-text);
 
     &:hover {
       background: rgba(0, 0, 0, 0.2);
