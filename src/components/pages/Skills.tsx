@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
 import PageWrapper from '../layout/PageWrapper';
 import '../../styles/pages/Skills.scss';
@@ -57,13 +57,20 @@ const Skills: React.FC = () => {
 
   useEffect(() => {
     let animationFrame: number;
-    const rotateIcons = () => {
+    let lastUpdateTime = performance.now();
+
+    const rotateIcons = (time: number) => {
       if (!isPaused) {
-        rotationRef.current = (rotationRef.current + 1) % 360;
-        setRotation(rotationRef.current);
+        const deltaTime = time - lastUpdateTime;
+        if (deltaTime > 16) {
+          rotationRef.current = (rotationRef.current + 1) % 360;
+          setRotation(rotationRef.current);
+          lastUpdateTime = time;
+        }
       }
       animationFrame = requestAnimationFrame(rotateIcons);
     };
+
     animationFrame = requestAnimationFrame(rotateIcons);
     return () => cancelAnimationFrame(animationFrame);
   }, [isPaused]);
@@ -72,8 +79,7 @@ const Skills: React.FC = () => {
     if (activeSkill) {
       const maxOffset = 293;
       const progress = (maxOffset * activeSkill.level) / 100;
-      const newOffset = maxOffset - progress;
-      setStrokeOffset(newOffset);
+      setStrokeOffset(maxOffset - progress);
     } else {
       setStrokeOffset(293);
     }
@@ -89,6 +95,28 @@ const Skills: React.FC = () => {
     setIsPaused(false);
   }, []);
 
+  const skillIcons = useMemo(() => {
+    return skills.map((skill, index) => {
+      const angle = (360 / skills.length) * index + rotation;
+      const radians = (angle * Math.PI) / 180;
+      const radius = 180;
+      const x = radius * Math.cos(radians);
+      const y = radius * Math.sin(radians);
+
+      return (
+        <motion.div
+          key={skill.name}
+          className="skill-icon"
+          style={{ left: `calc(43% + ${x}px)`, top: `calc(45% + ${y}px)` }}
+          whileHover={{ scale: 1.2 }}
+          onMouseEnter={() => handleSkillHover(skill)}
+          onMouseLeave={handleSkillLeave}>
+          <img src={skill.logo} alt={skill.name} />
+        </motion.div>
+      );
+    });
+  }, [rotation, handleSkillHover, handleSkillLeave]);
+
   return (
     <PageWrapper className="skills">
       <div className="skills-wheel">
@@ -102,9 +130,7 @@ const Skills: React.FC = () => {
               r="56"
               strokeDasharray="293"
               strokeDashoffset={strokeOffset}
-              style={{
-                opacity: activeSkill ? 1 : 0,
-              }}
+              style={{ opacity: activeSkill ? 1 : 0 }}
             />
           </svg>
 
@@ -128,34 +154,11 @@ const Skills: React.FC = () => {
             </motion.p>
           )}
         </div>
-
-        {skills.map((skill, index) => {
-          const angle = (360 / skills.length) * index + rotation;
-          const radians = (angle * Math.PI) / 180;
-          const radius = 180;
-          const x = radius * Math.cos(radians);
-          const y = radius * Math.sin(radians);
-
-          return (
-            <motion.div
-              key={skill.name}
-              className="skill-icon"
-              style={{
-                left: `calc(43% + ${x}px)`,
-                top: `calc(45% + ${y}px)`,
-              }}
-              whileHover={{ scale: 1.2 }}
-              onMouseEnter={() => handleSkillHover(skill)}
-              onMouseLeave={handleSkillLeave}>
-              <img src={skill.logo} alt={skill.name} />
-            </motion.div>
-          );
-        })}
+        {skillIcons}
       </div>
-
       <SkillInfo skill={activeSkill} />
     </PageWrapper>
   );
 };
 
-export default Skills;
+export default memo(Skills);
