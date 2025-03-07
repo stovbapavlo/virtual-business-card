@@ -14,6 +14,8 @@ const ContactCard: React.FC<ContactCardProps> = ({ name, url, username, logo }) 
   const dispatch = useDispatch();
   const flipped = useSelector((state: RootState) => state.contact.flipped[name] || false);
 
+  const cleanUsername = username.split('-').slice(0, 2).join('-');
+
   return (
     <div
       className={`contact-card ${flipped ? 'flipped' : ''}`}
@@ -22,7 +24,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ name, url, username, logo }) 
       <div className="card-front">
         <img src={logo} alt={name} className="card-logo" />
         <h3>{name}</h3>
-        <p>@{username}</p>
+        <p>@{cleanUsername}</p>
       </div>
       <div className="card-back">
         <QRCodeCanvas value={`${url}${username}`} size={128} className="qr-code" />

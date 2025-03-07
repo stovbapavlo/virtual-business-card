@@ -1,19 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --primary-bg: #1e1e1e;
+  --primary-bg: #313131;
   --primary-text: #ffffff;
-  --secondary-bg: #f5f5f5;
-  --secondary-text: #121212;
+  --secondary-bg: #1e1e1e;
+  --secondary-text: #d1d1d1;
   --accent-color: #00ff99;
+  --border-color: rgba(255, 255, 255, 0.2);
+
+  --button-bg: #7b7b7b;
+  --button-hover-bg: #00ff99;
+  --button-active-bg: #009977;
 }
 
 .dark-mode {
   --primary-bg: #f5f5f5;
   --primary-text: #121212;
-  --secondary-bg: #1e1e1e;
-  --secondary-text: #ffffff;
+  --secondary-bg: #ffffff;
+  --secondary-text: #444444;
   --accent-color: #0099ff;
+  --border-color: rgba(0, 0, 0, 0.2);
+
+  --button-bg: #cac9c9;
+  --button-hover-bg: #0099ff;
+  --button-active-bg: #0077cc;
 }
 
 body {
@@ -61,4 +71,22 @@ a {
 nav {
   display: flex;
   gap: 20px;
+}
+
+@media (max-width: 1023px), (min-width: 1921px), (max-height: 699px) {
+  .app {
+    display: none;
+  }
+
+  .resolution-warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background: var(--primary-bg);
+    color: var(--primary-text);
+    font-size: 1.5rem;
+    padding: 20px;
+  }
 }
