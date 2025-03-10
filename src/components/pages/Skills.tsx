@@ -9,6 +9,7 @@ import tsLogo from '../../assets/img/logos/typescript.png';
 import jsLogo from '../../assets/img/logos/javascript.png';
 import scssLogo from '../../assets/img/logos/sass.png';
 import reduxLogo from '../../assets/img/logos/redux.png';
+import gitLogo from '../../assets/img/logos/GitHub.png';
 
 const skills = [
   {
@@ -46,6 +47,13 @@ const skills = [
     description:
       'Basic experience with Redux Toolkit: state management, slices, createAsyncThunk, useSelector, useDispatch',
   },
+  {
+    name: 'Git',
+    level: 75,
+    logo: gitLogo,
+    description:
+      'I have experience with Git for version control, including branching, merging, rebasing, and working with remote repositories.',
+  },
 ];
 
 const Skills: React.FC = () => {
@@ -62,8 +70,8 @@ const Skills: React.FC = () => {
     const rotateIcons = (time: number) => {
       if (!isPaused) {
         const deltaTime = time - lastUpdateTime;
-        if (deltaTime > 16) {
-          rotationRef.current = (rotationRef.current + 1) % 360;
+        if (deltaTime > 8) {
+          rotationRef.current = (rotationRef.current + 0.4) % 360;
           setRotation(rotationRef.current);
           lastUpdateTime = time;
         }
