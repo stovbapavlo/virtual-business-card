@@ -37,6 +37,7 @@
     .active-skill-logo {
       width: 40%;
       height: 40%;
+      filter: invert(1);
     }
 
     p {
@@ -74,6 +75,7 @@
     width: 0%;
     height: 0%;
     cursor: pointer;
+    filter: invert(1);
   }
 }
 
@@ -130,6 +132,10 @@
 
       .progress-bar {
         stroke: var(--accent-color);
+      }
+      .active-skill-logo,
+      .skill-icon {
+        filter: invert(0);
       }
     }
   }
